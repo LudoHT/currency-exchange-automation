@@ -6,8 +6,12 @@ def main():
     year = 2026
     month = 3
 
-    fx_data = fetch_rates_for_month(year, month, CURRENCIES)
-    write_summary_sheet(TEMPLATE_FILE, OUTPUT_FILE, fx_data)
+    try:
+        fx_data = fetch_rates_for_month(year, month, CURRENCIES)
+        write_summary_sheet(TEMPLATE_FILE, OUTPUT_FILE, fx_data)
+    except RuntimeError as exc:
+        print(f"Error: {exc}")
+        return
 
     print(f"Done. Output saved to: {OUTPUT_FILE}")
 
